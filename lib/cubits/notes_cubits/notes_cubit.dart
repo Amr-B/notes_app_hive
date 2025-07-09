@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:hive/hive.dart';
@@ -12,11 +14,11 @@ class NotesCubit extends Cubit<NotesState> {
   List<NoteModel>? notes;
 
   void fetchAllNotes() async {
-    emit(NotesLoading());
     try {
       var notesBox = Hive.box<NoteModel>(kNotesBox);
-      notes = notesBox.values.toList();
-      emit(NotesSuccess(notes!));
+      // notes = notesBox.values.toList();
+      List<NoteModel> notes = notesBox.values.toList();
+      emit(NotesSuccess(notes));
     } catch (e) {
       emit(NotesFailure(e.toString()));
     }
