@@ -30,7 +30,7 @@ class NoteItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Flutter Tips',
+                    note.title,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 20,
@@ -47,7 +47,7 @@ class NoteItem extends StatelessWidget {
               SizedBox(height: 10),
 
               Text(
-                'a long text for this note about flutter tips or something else',
+                note.subTitle,
                 style: TextStyle(color: Colors.white, fontSize: 16),
               ),
               SizedBox(height: 10),
@@ -55,7 +55,7 @@ class NoteItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
-                    '16 May 2025',
+                    note.date,
                     style: TextStyle(color: Colors.grey, fontSize: 16),
                   ),
                 ],
