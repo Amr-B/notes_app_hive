@@ -17,15 +17,16 @@ class _NoteItemState extends State<NoteItem>
   double _scale = 1.0;
 
   void _deleteNote() async {
-    setState(() {
-      _scale = 0.0;
-    });
+    setState(() => _scale = 0.0);
+
+    await Future.delayed(const Duration(milliseconds: 200));
+
+    await widget.note.delete();
 
     await Future.delayed(
-      const Duration(milliseconds: 500),
-    ); // wait for animation
+      const Duration(milliseconds: 100),
+    ); // let list update layout
 
-    widget.note.delete();
     BlocProvider.of<NotesCubit>(context).fetchAllNotes();
   }
 
@@ -39,7 +40,9 @@ class _NoteItemState extends State<NoteItem>
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => EditNotePage()),
+            MaterialPageRoute(
+              builder: (context) => EditNotePage(note: widget.note),
+            ),
           );
         },
         child: Container(
