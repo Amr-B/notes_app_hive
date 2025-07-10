@@ -48,6 +48,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
           ),
           // > save button
           const SizedBox(height: 16),
+          ColorsListView(),
           BlocBuilder<AddNoteCubit, AddNoteState>(
             builder: (context, state) {
               return CustomButton(
@@ -76,6 +77,84 @@ class _AddNoteFormState extends State<AddNoteForm> {
           ),
           const SizedBox(height: 16),
         ],
+      ),
+    );
+  }
+}
+
+class ColorItem extends StatelessWidget {
+  const ColorItem({super.key, required this.isActive, required this.color});
+  final bool isActive;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return isActive
+        ? CircleAvatar(
+            radius: 25,
+            backgroundColor: Colors.white,
+            child: CircleAvatar(radius: 23, backgroundColor: color),
+          )
+        : CircleAvatar(radius: 25, backgroundColor: color);
+  }
+}
+
+class ColorsListView extends StatefulWidget {
+  const ColorsListView({super.key});
+
+  @override
+  State<ColorsListView> createState() => _ColorsListViewState();
+}
+
+class _ColorsListViewState extends State<ColorsListView> {
+  int currentIndex = 0;
+
+  final List<Color> colors = [
+    Color(0xffAC3931),
+    Color(0xffE5D352),
+    Color(0xffD9E76C),
+    Color(0xff537D8D),
+    Color(0xff482C3D),
+    Color(0xffFF6F61),
+    Color(0xff6B5B95),
+    Color(0xff88B04B),
+    Color(0xffF7CAC9),
+    Color(0xff92A8D1),
+    Color(0xff955251),
+    Color(0xffB565A7),
+    Color(0xff009B77),
+    Color(0xffDD4124),
+    Color(0xffD65076),
+    Color(0xff45B8AC),
+    Color(0xffEFC050),
+    Color(0xff5B5EA6),
+    Color(0xff9B2335),
+    Color(0xffDFCFBE),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 100,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: colors.length,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 4.0),
+            child: GestureDetector(
+              onTap: () {
+                setState(() {
+                  currentIndex = index;
+                });
+              },
+              child: ColorItem(
+                isActive: currentIndex == index,
+                color: colors[index],
+              ),
+            ),
+          );
+        },
       ),
     );
   }
