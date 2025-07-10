@@ -1,6 +1,7 @@
 // ignore_for_file: depend_on_referenced_packages
 
 import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:meta/meta.dart';
 import 'package:notes_app_hive/constants.dart';
@@ -19,8 +20,10 @@ class AddNoteCubit extends Cubit<AddNoteState> {
     try {
       var notesBox = Hive.box<NoteModel>(kNotesBox);
       await notesBox.add(note);
+      print('Note added: ${note.title}');
       emit(AddNoteSuccess());
     } catch (e) {
+      print('AddNote Error: $e');
       emit(AddNoteFalure(e.toString()));
     }
   }

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:notes_app_hive/models/note_model.dart';
 import 'package:notes_app_hive/views/edit_note_page.dart';
 
 class NoteItem extends StatelessWidget {
-  const NoteItem({super.key});
+  const NoteItem({super.key, required this.note});
+  final NoteModel note;
 
   @override
   Widget build(BuildContext context) {
