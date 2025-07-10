@@ -11,7 +11,6 @@ class NotesListView extends StatelessWidget {
     return BlocBuilder<NotesCubit, NotesState>(
       builder: (context, state) {
         if (state is NotesSuccess) {
-          print('Rendering ListView with ${state.notes.length} notes');
           return ListView.builder(
             itemCount: state.notes.length,
             itemBuilder: (context, index) {
